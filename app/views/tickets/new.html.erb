@@ -1,0 +1,11 @@
+<!-- app/views/tickets/new.html.erb -->
+<div id="new-ticket">
+  <center><h2>Create New Tickets</h2>
+
+  <%= render 'form', ticket: @ticket %>
+
+  <div class="actions">
+    <%= link_to 'Home', root_path, class: 'btn btn-secondary' %>
+    <%= link_to 'Back', tickets_path, class: 'btn btn-secondary' %>
+  </div></center>
+</div>

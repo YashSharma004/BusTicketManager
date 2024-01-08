@@ -1,0 +1,119 @@
+<!-- app/views/tickets/_form.html.erb -->
+<style>
+  .ticket-form {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  #error_explanation {
+    color: #dc3545;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn-secondary {
+    background-color: lightblue;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .custom-add-to-cart-btn {
+    background-color: #808080 !important;
+    height: 35px; 
+    border-radius: 5px !important; 
+  }
+  .custom-add-to-cart-btn:hover {
+    height: 35px;
+    background-color: lightblue;
+    color: white; 
+    border-color: black;
+  }
+</style>
+
+<%= form_with(model: ticket, local: true) do |form| %>
+  <div class="ticket-form">
+    <% if ticket.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h4><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h4>
+
+        <ul>
+          <% ticket.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <label for="user_id" class="form-label">Select User</label>
+      <%= form.collection_select :user_id, User.all, :id, :name, { prompt: 'Select User' }, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label for="booked_by_id" class="form-label">Select booked by user</label>
+      <%= form.collection_select :booked_by_id, User.all, :id, :name, { prompt: 'Select booked by user' }, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label for="booked_for_id" class="form-label">Select booked for user</label>
+      <%= form.collection_select :booked_for_id, User.all, :id, :name, { prompt: 'Select booked for user' }, class: 'form-control' %>
+      <%#= form.collection_select :booked_for_id, User.where.not(id: ticket.user_id), :id, :name, { prompt: 'Select booked for user' }, class: 'form-control', disabled: ticket.user_id.present? %>
+    </div>
+
+    <div class="form-group">
+      <label for="booked_count" class="form-label">Number of tickets booked</label>
+      <%= form.number_field :booked_count, class: 'form-control', placeholder: 'Number of tickets booked' %>
+    </div>
+
+    <div class="form-group">
+      <label for="extra_charges" class="form-label">Extra charges</label>
+      <%= form.number_field :extra_charges, step: 0.01, class: 'form-control', placeholder: 'Extra charges' %>
+    </div>
+
+    <div class="form-group">
+      <label for="week_date" class="form-label">Week date</label>
+      <%= form.date_field :week_date, class: 'form-control', placeholder: 'Week date' %>
+      <%#= form.hidden_field :week_number, value: (ticket.week_date ? ticket.week_date.cweek : nil) %>
+      <%#= form.hidden_field :year, value: (ticket.week_date ? ticket.week_date.year : nil) %>
+    </div>
+    <center>
+    <div class="actions">
+      <%= form.submit 'Create Ticket', class: "btn btn-outline-light btn-block mt-3 custom-add-to-cart-btn" %>
+      <%= link_to 'Cancel', tickets_path, class: 'btn btn-secondary' %>
+    </div>
+    </center>
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+<!-- app/views/payments/show.html.erb -->
+<div id="payment-details">
+  <center><h2>Payment Details</h2>
+
+  <% if @payment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@payment.errors.count, "error") %> prohibited this payment from being saved:</h2>
+
+      <ul>
+        <% @payment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="payment-info">
+    <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td><strong>Paid by:</strong></td>
+      <td><%= @payment.paid_by.name %></td>
+    </tr>
+    <tr>
+      <td><strong>Paid to:</strong></td>
+      <td><%= @payment.paid_to.name %></td>
+    </tr>
+    <tr>
+      <td><strong>Amount:</strong></td>
+      <td><%= @payment.amount %></td>
+    </tr>
+    <tr>
+      <td><strong>Date:</strong></td>
+      <td><%= @payment.date %></td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <%= link_to 'Edit Payment', edit_payment_path(@payment), class: 'btn btn-primary' %> 
+    <%= link_to 'Back to Payments', payments_path, class: 'btn btn-secondary' %> 
+    <%= link_to 'Home', root_path, class: 'btn btn-secondary' %>
+  </div>
+</center>
+</div>
+  

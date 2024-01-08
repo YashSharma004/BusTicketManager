@@ -1,0 +1,43 @@
+<!-- app/views/tickets/index.html.erb -->
+<div id="tickets-list">
+  <p id="notice"><%= notice %></p>
+
+  <center><h2>Tickets</h2>
+  <%if @tickets.present?%>
+  <table>
+
+      <tr>
+        <th>Booked By</th>
+        <th>Booked For</th>
+        <th>Booked Count</th>
+        <th>Extra Charges</th>
+        <th>Week Date</th>
+        <th>Actions</th>
+      </tr>
+
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr>
+          <td><%= ticket.booked_by.name %></td>
+          <td><%= ticket.booked_for.name %></td>
+          <td><%= ticket.booked_count %></td>
+          <td><%= ticket.extra_charges %></td>
+          <td><%= ticket.week_date %></td>
+          <td>
+            <%= link_to 'Show', ticket, class: 'btn btn-primary' %>
+            <%= link_to 'Edit', edit_ticket_path(ticket), class: 'btn btn-secondary' %>
+            <%#= button_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%else%>
+    <h3>No tickets found!</h3>
+  <%end%>
+  <div class="actions">
+    <%= link_to 'New Ticket', new_ticket_path, class: 'btn btn-primary' %>
+    <%= link_to 'Home', root_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
+</center>

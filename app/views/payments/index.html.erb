@@ -1,0 +1,43 @@
+<!-- app/views/tickets/index.html.erb -->
+<div id="tickets-list">
+  <center>
+  <p id="notice"><%= notice %></p>
+
+  <h2>Payments</h2>
+
+  <table>
+
+      <tr>
+        <%# <th>User</th> %>
+        <th>Paid By</th>
+        <th>Paid To</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+
+
+    <tbody>
+      <% @payments.each do |payment| %>
+        <tr>
+          <td><%= payment.paid_by.name %></td>
+          <td><%= payment.paid_to.name %></td>
+          <td><%= payment.amount %></td>
+          <td><%= payment.date %></td>
+          <td>
+          <%= link_to 'Show', payment, class: 'btn' %>
+          <%= link_to 'Edit', edit_payment_path(payment), class: 'btn' %>
+          <%#= button_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <%= link_to 'New Payment', new_payment_path, class: 'btn' %>
+    <%= link_to 'New Ticket', new_ticket_path, class: 'btn' %>
+    <%= link_to 'Home', home_index_path, class: 'btn' %>
+  </div>
+  </center>
+</div>

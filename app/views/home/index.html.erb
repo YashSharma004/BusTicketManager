@@ -1,0 +1,74 @@
+<!-- app/views/home/index.html.erb -->
+<%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<style>
+  #owe-summary {
+  margin-top: 20px;
+}
+
+.owe-item {
+  background-color: #f4f4f4;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.user-name {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.amount {
+  color: green;
+}
+
+.zero {
+  background-color: #e0e0e0;
+  color: #555;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  margin: 10px 0;
+  text-decoration: none;
+  background-color: lightblue;
+<%#   background-color: #3498db; %>
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+</style>
+<div id="owe-summary">
+  <% if @owe_summary.present? %>
+    <% @owe_summary.each do |user, amount| %>
+      <div class="owe-item <%= amount > 0 ? 'positive' : 'zero' %>">
+        <span class="user-name"><%= user.name %></span>
+        <span class="amount">
+          <% if amount > 0 %>
+            has to pay <%= amount %> rupees.
+          <% else %>
+            has not to pay any amount currently.
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="owe-item zero">
+      <span class="amount">No one has any outstanding amount currently.</span>
+    </div>
+  <% end %>
+</div>
+<%= link_to 'Add New Ticket Entry', new_ticket_path, class: 'btn' %>
+<%= link_to 'Show Previous Tickets', tickets_path, class: 'btn' %>
+<%= link_to 'Add Payment', new_payment_path, class: 'btn' %>
+<%= link_to 'Show Previous Payments', payments_path, class: 'btn' %>
+<%#= link_to 'Show Users', users_path, class: 'btn' %>
+<div class="owe-item <%= 0 == 0 ? 'positive' : 'zero' %>">
+Recently <%= @payment.paid_by.name %> paid <%= @payment.amount %> to <%= @payment.paid_to.name %>  on <%= @payment.date %>
+</div>

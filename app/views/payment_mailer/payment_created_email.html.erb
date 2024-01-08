@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Created</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .email-container {
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .ticket-container {
+      max-width: 600px;
+      width: 100%;
+      background-color: #fff;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: left;
+    }
+
+    h3 {
+      color: #007bff;
+    }
+
+    strong {
+      color: #007bff;
+      display: block;
+      margin-top: 10px;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    .owe-summary {
+      margin-top: 20px;
+    }
+
+    .owe-summary strong {
+      display: inline-block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-container">
+    <div class="ticket-container">
+      <h3>Payment Created/Updated</h3>
+      <p>
+        <strong>Paid by:</strong> <%= @payment_by.name %> (<%= @payment_by.email %>)<br>
+        <strong>Paid to:</strong> <%= @payment_to.name %> (<%= @payment_to.email %>)<br>
+        <strong>Amount Paid:</strong> <%= @payment.amount %><br>
+        <strong>Payment Date:</strong> <%= @payment.date.strftime("%a, %d %b %Y") %>
+      </p>
+
+      <strong>Recent Payments:</strong>
+      <%= @payment.paid_by.name %> paid <%= @payment.amount %> to <%= @payment.paid_to.name %>  on <%= @payment.date %>
+    </div>
+  </div>
+</body>
+</html>

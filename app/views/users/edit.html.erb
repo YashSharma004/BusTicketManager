@@ -1,0 +1,12 @@
+<!-- app/views/users/edit.html.erb -->
+<div id="edit-user">
+  <h1>Editing User</h1>
+
+  <%= render 'form', user: @user %>
+
+  <div class="user-actions">
+    <%= link_to 'Show', @user, class: 'btn btn-primary' %> |
+    <%= link_to 'Back', users_path, class: 'btn btn-secondary' %> |
+    <%= link_to 'Home', root_path, class: 'btn btn-secondary' %>
+  </div>
+</div>

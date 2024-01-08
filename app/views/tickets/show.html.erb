@@ -1,0 +1,51 @@
+<!-- app/views/tickets/show.html.erb -->
+<div id="ticket-details">
+  <center>
+  <h2>Ticket Details</h2>
+
+  <% if @ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+      <ul>
+        <% @ticket.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="ticket-info">
+    <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td><strong>Booked by:</strong></td>
+      <td><%= @ticket.booked_by.name %></td>
+    </tr>
+    <tr>
+      <td><strong>Booked for:</strong></td>
+      <td><%= @ticket.booked_for.name %></td>
+    </tr>
+    <tr>
+      <td><strong>Booked Count:</strong></td>
+      <td><%= @ticket.booked_count %></td>
+    </tr>
+    <tr>
+      <td><strong>Extra Charges:</strong></td>
+      <td><%= @ticket.extra_charges %></td>
+    </tr>
+    <tr>
+      <td><strong>Week Date:</strong></td>
+      <td><%= @ticket.week_date %></td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <%= link_to 'Edit Ticket', edit_ticket_path(@ticket), class: 'btn btn-primary' %> 
+    <%= link_to 'Back to Tickets', tickets_path, class: 'btn btn-secondary' %> 
+    <%= link_to 'Home', root_path, class: 'btn btn-secondary' %>
+  </div>
+  </center>
+</div>

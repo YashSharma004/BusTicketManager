@@ -1,0 +1,21 @@
+<%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <div class="form-outline form-white mb-4">
+      <%= form.label :name, class: "text-white-50 mb-1" %>
+      <%= form.text_field :name, class: "form-control form-control-sm field-label", autofocus: true, autocomplete: "name", placeholder: "Enter Your Name" %>
+    </div>
+    <%= form.submit %>
+  </div>
+<% end %>
