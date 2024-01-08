@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2024_01_07_152948) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
@@ -27,8 +30,8 @@ ActiveRecord::Schema.define(version: 2024_01_07_152948) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.integer "paid_by_id", null: false
-    t.integer "paid_to_id", null: false
+    t.bigint "paid_by_id", null: false
+    t.bigint "paid_to_id", null: false
     t.decimal "amount"
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 2024_01_07_152948) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "booked_by"
     t.integer "booked_count"
     t.datetime "created_at", precision: 6, null: false
@@ -46,8 +49,8 @@ ActiveRecord::Schema.define(version: 2024_01_07_152948) do
     t.decimal "amount_paid"
     t.decimal "extra_charges"
     t.date "week_date"
-    t.integer "booked_by_id", null: false
-    t.integer "booked_for_id", null: false
+    t.bigint "booked_by_id", null: false
+    t.bigint "booked_for_id", null: false
     t.string "week_number"
     t.string "year"
     t.index ["booked_by_id"], name: "index_tickets_on_booked_by_id"

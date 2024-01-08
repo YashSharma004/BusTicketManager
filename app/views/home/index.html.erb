@@ -70,5 +70,7 @@
 <%= link_to 'Show Previous Payments', payments_path, class: 'btn' %>
 <%#= link_to 'Show Users', users_path, class: 'btn' %>
 <div class="owe-item <%= 0 == 0 ? 'positive' : 'zero' %>">
+<%if @payment.present?%>
 Recently <%= @payment.paid_by.name %> paid <%= @payment.amount %> to <%= @payment.paid_to.name %>  on <%= @payment.date %>
+<%end%>
 </div>
