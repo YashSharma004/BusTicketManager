@@ -1,49 +1,73 @@
-<!-- app/views/home/index.html.erb -->
 <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+
   #owe-summary {
-  margin-top: 20px;
-}
+    margin-top: 20px;
+  }
 
-.owe-item {
-  background-color: #f4f4f4;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
+  .owe-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 15px;
+  }
 
-.user-name {
-  font-weight: bold;
-  margin-right: 10px;
-}
+  .user-name {
+    font-weight: bold;
+    margin-right: 10px;
+  }
 
-.amount {
-  color: green;
-}
+  .amount {
+    color: green;
+  }
 
-.zero {
-  background-color: #e0e0e0;
-  color: #555;
-}
+  .zero {
+    background-color: #e0e0e0;
+    color: #555;
+  }
 
-.btn {
-  display: inline-block;
-  padding: 8px 15px;
-  margin: 10px 0;
-  text-decoration: none;
-  background-color: lightblue;
-<%#   background-color: #3498db; %>
-  color: #fff;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
+  .btn-container {
+    text-align: center;
+    margin-top: 20px;
+  }
 
-.btn:hover {
-  background-color: #2980b9;
-}
+  .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    margin: 10px;
+    text-decoration: none;
+    background-color: lightblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn:hover {
+    background-color: lightcyan;
+  }
+
+  .recent-payment {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+  }
 
 </style>
+
 <div id="owe-summary">
   <% if @owe_summary.present? %>
     <% @owe_summary.each do |user, amount| %>
@@ -51,26 +75,31 @@
         <span class="user-name"><%= user.name %></span>
         <span class="amount">
           <% if amount > 0 %>
-            has to pay <%= amount %> rupees.
+          has to pay <%= amount %> rupees.
           <% else %>
-            has not to pay any amount currently.
+          has not to pay any amount currently.
           <% end %>
         </span>
       </div>
     <% end %>
   <% else %>
     <div class="owe-item zero">
-      <span class="amount">No one has any outstanding amount currently.</span>
+      <span class="amount">No one has to pay any amount currently.</span>
     </div>
   <% end %>
 </div>
-<%= link_to 'Add New Ticket Entry', new_ticket_path, class: 'btn' %>
-<%= link_to 'Show Previous Tickets', tickets_path, class: 'btn' %>
-<%= link_to 'Add Payment', new_payment_path, class: 'btn' %>
-<%= link_to 'Show Previous Payments', payments_path, class: 'btn' %>
-<%#= link_to 'Show Users', users_path, class: 'btn' %>
-<div class="owe-item <%= 0 == 0 ? 'positive' : 'zero' %>">
-<%if @payment.present?%>
-Recently <%= @payment.paid_by.name %> paid <%= @payment.amount %> to <%= @payment.paid_to.name %>  on <%= @payment.date %>
-<%end%>
+
+<div class="btn-container">
+  <%= link_to 'Add New Ticket Entry', new_ticket_path, class: 'btn' %>
+  <%= link_to 'Show Previous Tickets', tickets_path, class: 'btn' %>
+  <%= link_to 'Add Payment', new_payment_path, class: 'btn' %>
+  <%= link_to 'Show Previous Payments', payments_path, class: 'btn' %>
+</div>
+
+<div class="recent-payment <%= @payment.present? ? 'positive' : 'zero' %>">
+  <% if @payment.present? %>
+    Recently <%= @payment.paid_by.name %> paid <%= @payment.amount %> to <%= @payment.paid_to.name %> on <%= @payment.date %>
+  <% else %>
+    No recent payments.
+  <% end %>
 </div>

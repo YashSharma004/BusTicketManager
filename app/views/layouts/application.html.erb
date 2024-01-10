@@ -1,16 +1,138 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>BusTicketManager</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<html lang="en">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>BusTicketManager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <%= yield %>
-  </body>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+  <style type="text/css">
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      padding-bottom: 150px;
+    }
+
+    header {
+      background-color: lightblue; /* Updated header color to a shade of blue */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #a2a2a2;
+      border-radius: 5px;
+      top: 0;
+      width: 100%;
+      z-index: 10000;
+      padding: 10px;
+    }
+
+    .logo img {
+      max-height: 40px;
+      margin: 0 10px;
+    }
+
+    .logo a {
+      color: white;
+      font-family: Trebuchet MS;
+      font-size: 23px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo a:hover {
+      color: lightcyan;
+    }
+
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      position: fixed;
+       padding: 8px;
+      bottom: 0;
+      width: 100%;
+      display: none; 
+    }
+
+    .footer-logo img {
+      max-height: 70px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-logo a {
+      color: #fff;
+      font-family: Trebuchet MS;
+      font-size: 23px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo a:hover {
+      color: lightcyan;
+    }
+
+    .footer-info {
+      text-align: right;
+    }
+
+    .home-content {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var footer = document.querySelector('footer');
+      footer.style.display = 'block'; // Display the footer after the content is loaded
+    });
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a class="brand navbar-brand" href= "">
+        <img src="https://i.postimg.cc/Pf8gpbpx/Screenshot-from-2024-01-09-18-19-37-removebg-preview-1.png" alt=""><b>Ticket Management System</b>
+      </a>
+    </div>
+    <%# Ticket Management System %>
+  </header>
+  <%= yield %>
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <a class="brand navbar-brand" href="http://localhost:3000/">
+          <img src="https://i.postimg.cc/vmh1f4m2/Screenshot-from-2024-01-10-10-46-02-removebg-preview.png" alt="">
+        </a>
+      </div>
+      <div class="footer-info">
+        <p>Created by Yash</p>
+        <p>Contact: yashsharma0787@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
 </html>

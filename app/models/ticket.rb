@@ -1,6 +1,6 @@
 # app/models/ticket.rb
 class Ticket < ApplicationRecord
-  after_update :send_ticket_created_email
+  after_create :send_ticket_created_email
   after_update :send_ticket_created_email
   belongs_to :user
   belongs_to :booked_by, class_name: 'User', foreign_key: 'booked_by_id', optional: true
