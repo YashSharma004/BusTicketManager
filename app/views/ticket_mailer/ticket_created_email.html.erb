@@ -60,7 +60,6 @@
   <div class="email-container">
     <div class="ticket-container">
       <h3>Ticket Created/Updated</h3>
-      <%byebug%>
       <h4>Your ticket details of week from: <%="#{@ticket.week_date.beginning_of_week} to #{@ticket.week_date.end_of_week}"%></h4>
       <p>
         <strong>Booked By:</strong> <%= @user_booked_by.name %> (<%= @user_booked_by.email %>)<br>
