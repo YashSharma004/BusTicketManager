@@ -38,7 +38,7 @@ class TicketsController < ApplicationController
   # PATCH/PUT /tickets/1 or /tickets/1.json
   def update
     respond_to do |format|
-      if @ticket.update(ticket_params) && @ticket.update(week_number: @ticket.week_date.cweek, year: @ticket.week_date.year)
+      if @ticket.update(ticket_params.merge(week_number: @ticket.week_date.cweek, year: @ticket.week_date.year))
         format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully updated." }
         format.json { render :show, status: :ok, location: @ticket }
       else
