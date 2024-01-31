@@ -17,25 +17,27 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+<%#       height: 100vh; %>
+      height: auto;
     }
 
     .ticket-container {
       max-width: 600px;
       width: 100%;
       background-color: #fff;
-      border: 2px solid #007bff;
+      border: 3px solid cyan;
+<%#       border: 2px solid #007bff; %>
       border-radius: 10px;
       padding: 20px;
       text-align: left;
     }
 
-    h3 {
-      color: #007bff;
+    h4 {
+      color: lightblue;
     }
 
     strong {
-      color: #007bff;
+      color: lightblue;
       display: block;
       margin-top: 10px;
     }
@@ -52,22 +54,37 @@
       display: inline-block;
       margin-top: 5px;
     }
+     .footer-bold{
+<%#       color: #f58754; %>
+      color: cyan;
+    }
   </style>
 </head>
 <body>
   <div class="email-container">
     <div class="ticket-container">
-      <h3>Payment Created/Updated</h3>
+      <h4>A new payment is done on: <%="#{@payment.date}"%></h4>
       <p>
         <strong>Paid by:</strong> <%= @payment_by.name %> (<%= @payment_by.email %>)<br>
         <strong>Paid to:</strong> <%= @payment_to.name %> (<%= @payment_to.email %>)<br>
-        <strong>Amount Paid:</strong> <%= @payment.amount %><br>
+        <strong>Amount Paid:</strong> ₹<%= @payment.amount %><br>
         <strong>Payment Date:</strong> <%= @payment.date.strftime("%a, %d %b %Y") %>
       </p>
 
-      <strong>Recent Payments:</strong>
-      <%= @payment.paid_by.name %> paid <%= @payment.amount %> to <%= @payment.paid_to.name %>  on <%= @payment.date %>
+      <div class="owe-summary">
+        <strong>Owe Summary:</strong><br>
+        <% @owe_summary.each do |user, amount| %>
+          <%if amount > 0%>
+          <span><b style="color: cyan;"><%= "#{user.name}"%></b> has to pay  ₹<%= "#{amount}." %></span><br>
+          <%else%>
+            <span><b style="color: cyan;"><%= "#{user.name}"%></b> has not to pay any amount currently.</span><br>
+          <%end%>
+        <% end %>
+      </div>
     </div>
   </div>
+  <footer>
+      <p style="color: #0a0a2a; font-size: 0.6em;">Bus Ticket Manager | Developed By: <b class="footer-bold">Yash Sharma</b></p>
+  </footer>
 </body>
 </html>

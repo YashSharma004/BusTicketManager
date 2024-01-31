@@ -8,6 +8,6 @@ class TicketMailer < ApplicationMailer
     @user_booked_for = User.find(@ticket.booked_for_id)
     @payment = Payment.order(updated_at: :desc).first 
 
-    mail(to: [@user_booked_by.email, @user_booked_for.email], subject: 'Ticket Created/Updated')
+    mail(to: [@user_booked_by.email, @user_booked_for.email], subject: 'Bus Ticket Manager | New Ticket Created-Modified')
   end
 end

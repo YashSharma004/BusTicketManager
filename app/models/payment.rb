@@ -9,6 +9,6 @@ class Payment < ApplicationRecord
  
   private
   def send_payment_created_email
-    PaymentMailer.payment_created_email(self).deliver_now
+    PaymentMailer.payment_created_email(self, HomeController.calculate_owe_summary).deliver_now
   end
 end
