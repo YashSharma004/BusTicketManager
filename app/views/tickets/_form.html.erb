@@ -93,10 +93,18 @@
       <%#= form.collection_select :booked_for_id, User.where.not(id: ticket.user_id), :id, :name, { prompt: 'Select booked for user' }, class: 'form-control', disabled: ticket.user_id.present? %>
     </div>
 
-    <div class="form-group">
+    <div  style="display: flex;">
+      <div class="form-group">
       <label for="booked_count" class="form-label">Number of tickets booked</label>
       <%= form.number_field :booked_count, class: 'form-control', placeholder: 'Number of tickets booked' %>
+      </div>
+      <div class="form-group">
+        <label for="price_per_ticket" class="form-label">Price per ticket</label>
+        <%= form.number_field :price_per_ticket, class: 'form-control', placeholder: 'Price per ticket', step: 'any', value: (ticket.new_record? ? 85 : ticket.price_per_ticket) %>
+      </div>
     </div>
+
+   
 
     <div class="form-group">
       <label for="extra_charges" class="form-label">Extra charges</label>

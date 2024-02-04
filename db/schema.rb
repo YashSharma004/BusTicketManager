@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_01_07_152948) do
+ActiveRecord::Schema.define(version: 2024_02_04_115356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2024_01_07_152948) do
     t.bigint "booked_for_id", null: false
     t.string "week_number"
     t.string "year"
+    t.decimal "price_per_ticket", default: "85.0"
     t.index ["booked_by_id"], name: "index_tickets_on_booked_by_id"
     t.index ["booked_for_id"], name: "index_tickets_on_booked_for_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"

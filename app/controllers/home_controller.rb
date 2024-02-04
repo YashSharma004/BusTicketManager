@@ -15,7 +15,11 @@ class HomeController < ApplicationController
       booked_for = ticket.booked_for
       relationship = "Friends"
       # Calculate the total amount for this ticket, including extra charges
-      total_amount = ticket.booked_count * 85 + ticket.extra_charges
+      if ticket.price_per_ticket == 85
+        total_amount = ticket.booked_count * 85 + ticket.extra_charges
+      else
+        total_amount = ticket.booked_count * ticket.price_per_ticket + ticket.extra_charges
+      end
 
       # Update the owe_summary hash based on the relationship
       if relationship == 'Friends'

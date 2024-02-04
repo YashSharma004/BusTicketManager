@@ -9,8 +9,10 @@
       <tr>
         <th>Booked By</th>
         <th>Booked For</th>
-        <th>Booked Count</th>
-        <th>Extra Charges</th>
+        <th>Total Booked</th>
+        <th>Per Ticket Price</th>
+        <th>Total Amount (exl. EC)</th>
+        <th>Extra Charges(EC)</th>
         <th>Week Date</th>
         <th>Actions</th>
       </tr>
@@ -21,7 +23,9 @@
           <td><%= ticket.booked_by.name %></td>
           <td><%= ticket.booked_for.name %></td>
           <td><%= ticket.booked_count %></td>
-          <td><%= ticket.extra_charges %></td>
+          <td>₹<%= ticket.price_per_ticket %></td>
+          <td>₹<%= ticket.price_per_ticket * ticket.booked_count %></td>
+          <td>₹<%= ticket.extra_charges %></td>
           <td><%= ticket.week_date %></td>
           <td>
             <%= link_to 'Show', ticket, class: 'btn btn-primary' %>

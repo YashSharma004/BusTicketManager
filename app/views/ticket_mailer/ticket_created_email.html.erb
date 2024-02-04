@@ -70,6 +70,7 @@
         <strong>Booked By:</strong> <%= @user_booked_by.name %> (<%= @user_booked_by.email %>)<br>
         <strong>Booked For:</strong> <%= @user_booked_for.name %> (<%= @user_booked_for.email %>)<br>
         <strong>Number of Tickets Booked:</strong> <%= @ticket.booked_count %><br>
+        <strong>Per Ticket Price:</strong> ₹<%= @ticket.price_per_ticket %><br>
         <strong>Extra Charges:</strong> ₹<%= @ticket.extra_charges %><br>
         <strong>Booking Date:</strong> <%= @ticket.week_date.strftime("%a, %d %b %Y") %>
         <strong>Week Year of Booking:</strong> Week <%= @ticket.week_number%> of <%= @ticket.year%>

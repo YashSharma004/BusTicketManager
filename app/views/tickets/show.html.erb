@@ -29,16 +29,24 @@
       <td><%= @ticket.booked_for.name %></td>
     </tr>
     <tr>
-      <td><strong>Booked Count:</strong></td>
+      <td><strong>Total Booked:</strong></td>
       <td><%= @ticket.booked_count %></td>
-    </tr>
-    <tr>
-      <td><strong>Extra Charges:</strong></td>
-      <td><%= @ticket.extra_charges %></td>
     </tr>
     <tr>
       <td><strong>Week Date:</strong></td>
       <td><%= @ticket.week_date %></td>
+    </tr>
+    <tr>
+      <td><strong>Per Ticket Price:</strong></td>
+      <td>₹<%= @ticket.price_per_ticket %></td>
+    </tr>
+    <tr>
+      <td><strong>Extra Charges(EC):</strong></td>
+      <td>₹<%= @ticket.extra_charges %></td>
+    </tr>
+    <tr>
+      <td><strong>Total Amount (exl. EC):</strong></td>
+      <td>₹<%= @ticket.price_per_ticket * @ticket.booked_count %></td>
     </tr>
   </table>
 

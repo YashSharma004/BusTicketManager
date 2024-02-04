@@ -29,7 +29,7 @@ class Ticket < ApplicationRecord
   end
 
   def unique_week
-    existing_ticket = Ticket.where.not(id: id).find_by(week_number: week_number, year: year)
+    existing_ticket = Ticket.where.not(id: id).find_by(week_number: week_number, year: year, user_id: user_id)
 
     if existing_ticket.present?
       errors.add(:base, "Tickets for the week of selected date are already booked")

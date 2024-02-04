@@ -69,7 +69,7 @@ class TicketsController < ApplicationController
     #   params.require(:ticket).permit(:user_id, :booked_count, :extra_charges, :week_date, :booked_by_id, :booked_for_id)
     # end
 def ticket_params
-  params.require(:ticket).permit(:user_id, :booked_count, :extra_charges, :week_date, :booked_by_id, :booked_for_id)
+  params.require(:ticket).permit(:user_id, :booked_count, :extra_charges, :price_per_ticket, :week_date, :booked_by_id, :booked_for_id)
 end
 
 end
