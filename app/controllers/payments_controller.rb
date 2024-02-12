@@ -1,9 +1,13 @@
 class PaymentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_payment, only: %i[ show edit update destroy ]
 
   # GET /payments or /payments.json
+  # def index
+  #   @payments = Payment.all
+  # end
   def index
-    @payments = Payment.all
+    @payments = Payment.where("paid_to_id = ? OR paid_by_id = ?", current_user.id, current_user.id)
   end
 
   # GET /payments/1 or /payments/1.json
@@ -25,6 +29,7 @@ class PaymentsController < ApplicationController
 
     respond_to do |format|
       if @payment.save
+        @payment.send_payment_created_email(current_user)
         format.html { redirect_to payment_url(@payment), notice: "Payment was successfully created." }
         format.json { render :show, status: :created, location: @payment }
       else
@@ -38,6 +43,7 @@ class PaymentsController < ApplicationController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
+        @payment.send_payment_created_email(current_user)
         format.html { redirect_to payment_url(@payment), notice: "Payment was successfully updated." }
         format.json { render :show, status: :ok, location: @payment }
       else
@@ -58,12 +64,21 @@ class PaymentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # def set_payment
+    #   @payment = Payment.find(params[:id])
+    # end
+
+    # def payment_params
+    #   params.require(:payment).permit(:paid_to_id, :paid_by_id, :amount, :date)
+    # end
+    
     def set_payment
       @payment = Payment.find(params[:id])
+      unless @payment.paid_to_id == current_user.id || @payment.paid_by_id == current_user.id
+        redirect_to root_path, alert: "You are not authorized to view this payment."
+      end
     end
 
-    # Only allow a list of trusted parameters through.
     def payment_params
       params.require(:payment).permit(:paid_to_id, :paid_by_id, :amount, :date)
     end

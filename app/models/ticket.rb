@@ -1,18 +1,26 @@
 # app/models/ticket.rb
 class Ticket < ApplicationRecord
-  after_create :send_ticket_created_email
-  after_update :send_ticket_created_email
+  # after_create :send_ticket_created_email
+  # after_update :send_ticket_created_email
   belongs_to :user
   belongs_to :booked_by, class_name: 'User', foreign_key: 'booked_by_id', optional: true
   belongs_to :booked_for, class_name: 'User', foreign_key: 'booked_for_id', optional: true
 
-  validates :user_id, presence: true  
+  validates :user_id, :booked_by, :booked_for, :week_date, presence: true  
   validates :booked_count, presence: true
   validates :extra_charges, numericality: { greater_than_or_equal_to: 0 }
   validates :week_date, presence: true
   validate :different_user_and_booked_by
   validate :different_user_and_booked_for
   validate :unique_week#, on: :create
+
+  def send_ticket_created_email(current_user)
+    booked_by = User.find(self.booked_by_id)
+    booked_for = User.find(self.booked_for_id)
+    TicketMailer.ticket_created_email(self, HomeController.calculate_owe_summary(booked_by), booked_by).deliver_now
+    TicketMailer.ticket_created_email(self, HomeController.calculate_owe_summary(booked_for), booked_for).deliver_now
+    # TicketMailer.ticket_created_email(self, HomeController.calculate_owe_summary(current_user), current_user).deliver_now
+  end
 
   private
 
@@ -29,13 +37,12 @@ class Ticket < ApplicationRecord
   end
 
   def unique_week
-    existing_ticket = Ticket.where.not(id: id).find_by(week_number: week_number, year: year, user_id: user_id)
+    existing_ticket = Ticket.where.not(id: id).find_by(user_id: user_id, booked_for_id: booked_for_id, week_number: week_number, year: year)
+    # existing_ticket = Ticket.find_by(user_id: user_id, booked_for_id: booked_for_id, week_number: week_number, year: year)
+    # existing_ticket = Ticket.where.not(id: id, booked_for: booked_for).find_by(week_number: week_number, year: year, user_id: user_id)
 
     if existing_ticket.present?
       errors.add(:base, "Tickets for the week of selected date are already booked")
     end
-  end
-  def send_ticket_created_email
-    TicketMailer.ticket_created_email(self, HomeController.calculate_owe_summary).deliver_now
   end
 end

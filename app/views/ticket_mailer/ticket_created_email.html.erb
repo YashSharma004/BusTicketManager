@@ -78,16 +78,19 @@
 
       <div class="owe-summary">
         <strong>Owe Summary:</strong><br>
-        <% @owe_summary.each do |user, amount| %>
+        <% @owe_summary.each do |user_id, amount| %>
+          <% user = User.find(user_id) %>
           <%if amount > 0%>
-          <span><b style="color: cyan;"><%= "#{user.name}"%></b> has to pay  ₹<%= "#{amount}." %></span><br>
+          <span><b style="color: cyan;"><%= "#{user.name}"%></b> has to pay <b style="color: cyan;"> <%= @current_user.name %> </b> ₹<%= "#{amount}." %></span><br>
           <%else%>
-            <span><b style="color: cyan;"><%= "#{user.name}"%></b> has not to pay any amount currently.</span><br>
+            <span><b style="color: cyan;"> <%= @current_user.name %> </b> has to pay <b style="color: cyan;"> <%= "#{user.name}"%></b>  ₹<%= "#{ amount.abs }."%></span><br>
           <%end%>
         <% end %>
       </div>
+      <%if @payment.present? %>
       <strong>Recent Payments:</strong>
       Recently <%= @payment.paid_by.name %> paid ₹<%= @payment.amount %> to <%= @payment.paid_to.name %>  on <%= @payment.date %>
+      <%end%>
     </div>
   </div>
   <footer>

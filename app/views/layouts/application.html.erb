@@ -119,7 +119,9 @@
         <%# <img src="/assets/black_logo.png" alt=""><b>Ticket Management System</b> %>
       </a>
     </div>
-    <%# Ticket Management System %>
+    <%if current_user.present?%>
+    <%= button_to 'Logout', destroy_user_session_path, method: :delete,class: "dropdownbutton-nav btn btn-outline-light btn-md px-5" %>
+    <%end%>
   </header>
   <%= yield %>
   <footer>

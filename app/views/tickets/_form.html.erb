@@ -79,18 +79,20 @@
 
     <div class="form-group">
       <label for="user_id" class="form-label">Select User</label>
-      <%= form.collection_select :user_id, User.all, :id, :name, { prompt: 'Select User' }, class: 'form-control' %>
+      <%#= form.collection_select :user_id, User.all, :id, :name, { prompt: 'Select User' }, class: 'form-control' %>
+      <%= form.collection_select :user_id, [current_user], :id, :name, { prompt: 'Select User' }, class: 'form-control' %>
     </div>
 
     <div class="form-group">
       <label for="booked_by_id" class="form-label">Select booked by user</label>
-      <%= form.collection_select :booked_by_id, User.all, :id, :name, { prompt: 'Select booked by user' }, class: 'form-control' %>
+      <%#= form.collection_select :booked_by_id, User.all, :id, :name, { prompt: 'Select booked by user' }, class: 'form-control' %>
+      <%= form.collection_select :booked_by_id, [current_user], :id, :name, { prompt: 'Select booked by user' }, class: 'form-control' %>
     </div>
 
     <div class="form-group">
       <label for="booked_for_id" class="form-label">Select booked for user</label>
-      <%= form.collection_select :booked_for_id, User.all, :id, :name, { prompt: 'Select booked for user' }, class: 'form-control' %>
-      <%#= form.collection_select :booked_for_id, User.where.not(id: ticket.user_id), :id, :name, { prompt: 'Select booked for user' }, class: 'form-control', disabled: ticket.user_id.present? %>
+      <%= form.collection_select :booked_for_id, User.where.not(id: current_user.id), :id, :name, { prompt: 'Select booked for user' }, class: 'form-control' %>
+      <%#= form.collection_select :booked_for_id, User.all, :id, :name, { prompt: 'Select booked for user' }, class: 'form-control' %>
     </div>
 
     <div  style="display: flex;">

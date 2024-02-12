@@ -65,29 +65,53 @@
     padding: 15px;
     margin-top: 20px;
   }
+    h3{
+      text-align: center;
+   font-weight: 150x;
+   margin-bottom: 10px;
+   font-size: 25px;
+   position: relative;
+<%#    -webkit-text-stroke: 1px #3E6469; %>
+   color: lightseagreen;
+  }
 
+  h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0%;
+    background-color: lightblue;
+    transition: all ease 1s;
+  } 
 </style>
 
 <div id="owe-summary">
+  <h3 style="margin-bottom: 10px">Hey! <%= current_user.name%></h3>
   <% if @owe_summary.present? %>
-    <% @owe_summary.each do |user, amount| %>
-      <div class="owe-item <%= amount > 0 ? 'positive' : 'zero' %>">
-        <span class="user-name"><%= user.name %></span>
+    <% @owe_summary.each do |user_id, amount| %>
+      <% user = User.find(user_id) %>
+      <div class="owe-item <%= amount > 0 ? 'positive' : 'negative' %>">
         <span class="amount">
           <% if amount > 0 %>
-          has to pay ₹<%= amount %>.
+           <%# <span class="user-name"></span> %>
+           <b><%= user.name %></b>
+            has to pay <b>You</b> <i style="color: red; font-size: 15px; font-family: Montserrat, sans-serif;"> ₹<%= amount.abs %>.</i>
           <% else %>
-          has not to pay any amount currently.
+            <%# <span class="user-name"> You </span> %>
+            <b> You </b> have to pay <b><%= user.name %></b> <i style="color: red; font-size: 15px; font-family: Montserrat, sans-serif;">₹<%= amount.abs %>.</i>
           <% end %>
         </span>
       </div>
     <% end %>
   <% else %>
     <div class="owe-item zero">
-      <span class="amount">No one has to pay any amount currently.</span>
+      <span class="amount">You don't have to pay or take anything from anyone.</span>
     </div>
   <% end %>
 </div>
+
 
 <div class="btn-container">
   <%= link_to 'Add New Ticket Entry', new_ticket_path, class: 'btn' %>
@@ -98,7 +122,7 @@
 
 <div class="recent-payment <%= @payment.present? ? 'positive' : 'zero' %>">
   <% if @payment.present? %>
-    Recently <%= @payment.paid_by.name %> paid <%= @payment.amount %> to <%= @payment.paid_to.name %> on <%= @payment.date %>
+    Recently <b><%= @payment.paid_by.name %></b> paid ₹<%= @payment.amount %> to <b><%= @payment.paid_to.name %></b> on <%= @payment.date %>
   <% else %>
     No recent payments.
   <% end %>
