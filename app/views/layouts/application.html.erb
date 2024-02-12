@@ -99,6 +99,9 @@
       border-radius: 5px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+    h5{
+      text-align: center;
+    }
 
   </style>
 
@@ -123,6 +126,16 @@
     <%= button_to 'Logout', destroy_user_session_path, method: :delete,class: "dropdownbutton-nav btn btn-outline-light btn-md px-5" %>
     <%end%>
   </header>
+  <h5>
+    <% if notice %>
+      <div class="alert alert-success"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger"><%= alert %></div>
+    <% end %>
+    <p class="navbar-text float-right">
+    </p>
+  </h5>
   <%= yield %>
   <footer>
     <div class="footer-content">
@@ -138,5 +151,13 @@
     </div>
   </footer>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    console.log("Script is running!");
+    $(".alert-danger").delay(3000).slideUp(350);
+    $(".alert-success").delay(3000).slideUp(350);
+  }); 
+</script>
 
 </html>
