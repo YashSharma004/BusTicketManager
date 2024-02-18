@@ -12,7 +12,7 @@ ActiveAdmin.register EmailNotification do
       f.input :seat_number, as: :select, collection: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', 'A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4', 'E1', 'E2', 'E3', 'E4', 'F1', 'F2', 'F3', 'F4', 'G1', 'G2', 'G3', 'G4', 'H1', 'H2', 'H3', 'H4', 'I1', 'I2', 'I3', 'I4', 'J1', 'J2', 'J3', 'J4', 'K1', 'K2', 'K3', 'K4', 'L1', 'L2', 'L3', 'L4', 'M1', 'M2', 'M3', 'M4', 'N1', 'N2', 'N3', 'N4', 'O1', 'O2', 'O3', 'O4', 'P1', 'P2', 'P3', 'P4', 'Q1', 'Q2', 'Q3', 'Q4', 'R1', 'R2', 'R3', 'R4', 'S1', 'S2', 'S3', 'S4', 'T1', 'T2', 'T3', 'T4', 'U1', 'U2', 'U3', 'U4', 'V1', 'V2', 'V3', 'V4', 'W1', 'W2', 'W3', 'W4', 'X1', 'X2', 'X3', 'X4', 'Y1', 'Y2', 'Y3', 'Y4', 'Z1', 'Z2', 'Z3', 'Z4']
 
       f.input :email, :label => 'Email', :as => :select, :collection => User.all.map{|user| ["#{user.name}", user.email]}
-      f.input :subject
+      f.input :subject, :label => 'Email Type', as: :select, collection: ['Reminder', 'Other']
       f.input :message
     end
     f.actions
