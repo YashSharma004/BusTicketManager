@@ -20,7 +20,6 @@ ActiveAdmin.register EmailNotification do
   controller do
     def create
       super do |format|
-        byebug
         if resource.valid?
           EmailNotificationMailer.email_notification(resource).deliver_now
         end
