@@ -16,7 +16,6 @@ class EmailNotificationMailer < ApplicationMailer
 			hour -= 12
 		end
 		@formatted_time = "#{hour}:#{minute} #{meridiem}"
-		byebug
 		if email_notification.subject.present? && email_notification.subject == "Reminder"
 	  	mail(to: @booked_by.email, subject: "Reminder | Your Journey Details for #{email_notification.date.strftime("%a, %d %b %Y")} #{@formatted_time} | Bus Ticket Manager")
 	  else
