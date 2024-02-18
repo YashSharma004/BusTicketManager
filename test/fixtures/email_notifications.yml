@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2024-02-17
+  time: 2024-02-17 23:19:18
+  from_city: MyString
+  to_city: MyString
+  seat_number: MyString
+  email: MyString
+  subject: MyString
+  message: MyText
+
+two:
+  date: 2024-02-17
+  time: 2024-02-17 23:19:18
+  from_city: MyString
+  to_city: MyString
+  seat_number: MyString
+  email: MyString
+  subject: MyString
+  message: MyText

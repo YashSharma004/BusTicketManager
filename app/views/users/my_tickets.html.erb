@@ -1,0 +1,37 @@
+<center>
+  <div class="card">
+    <div class="card-body">
+      <p>You can add details to tickets, once you add details to a ticket the owner will recieve mail with all the journey details.</p>
+      <%= form_tag(ticket_bookings_new_path, method: :get) do %>
+        <div class="form-group">
+          <%= label_tag :ticket_id, "Select a Ticket Week to Add Details" %>
+          <%= select_tag(:ticket_id, options_for_select(@user_tickets.map { |t| [t.week_date, t.id] }), prompt: " From here", class: "form-control") %>
+        </div>
+        <%= submit_tag "Add/Save Details", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+<div class="user-actions">
+    <%= link_to 'Home', root_path, class: 'btn btn-secondary' %>
+</div>
+</center>
+<style type="text/css">
+  .card {
+  width: 80%;
+  max-width: 400px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+</style>

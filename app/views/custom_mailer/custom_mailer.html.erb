@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to OMS Portal</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 0;
+      }
+      .container {
+          max-width: 600px;
+          margin: 20px auto;
+          margin-top: 0px;
+          padding: 20px;
+          background-color: rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .bottom-container {
+          max-width: 600px;
+          margin: 20px auto;
+          margin-top: 0px;
+          padding: 20px;
+          background-color: white;
+          
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .top-container{
+      max-width: 600px;
+        margin: 20px auto;
+        margin-bottom: 0px;
+        padding: 20px;
+      	height: 140px;
+      	background-color: #13133a;
+      }
+      h2 {
+          color: white;
+          text-align: center;
+          font-size: 1.0em;
+      }
+      p {
+          color: #888;
+          text-align: center;
+          margin-bottom: 20px;
+      }
+      img{
+      	width: 75px;
+      	height: 20px;
+      }
+      .top{
+      	width: 70px;
+      	height: 55px;
+      }
+      
+  </style>
+</head>
+<body>
+ <div class="container">
+	<div class="top-container">
+	<center>
+    <%= image_tag attachments['bus.png'].url, alt: 'Our Photo', class: 'photo', style:"height: 15%; width: 25%; color: red;" -%>
+  </center>
+    <h2>Hello <%= @booked_by.name%> </h2>
+    <h2>Your Upcoming Journey Details</h2>
+    </div>
+    <div class="bottom-container">
+      <p>
+        <p> Seat No: <b> <%= @booking.seat_number%> </b>  <p>
+        <p> Time: <b> <%= @formatted_time%></b></p>
+        <p> Date: <b> <%= @booking.journey_date%><%= @booking.day%></b>  </p>
+        <p> Journey from: <b><%= @booking.journey_location%></b><p>
+      </p>
+    </div>
+ </div>
+</body>
+</html>

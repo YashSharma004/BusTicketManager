@@ -5,6 +5,7 @@ class Ticket < ApplicationRecord
   belongs_to :user
   belongs_to :booked_by, class_name: 'User', foreign_key: 'booked_by_id', optional: true
   belongs_to :booked_for, class_name: 'User', foreign_key: 'booked_for_id', optional: true
+  has_many :ticket_bookings, dependent: :destroy
 
   validates :user_id, :booked_by, :booked_for, :week_date, presence: true  
   validates :booked_count, presence: true

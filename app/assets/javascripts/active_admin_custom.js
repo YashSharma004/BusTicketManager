@@ -1,8 +1,3 @@
-//= require active_admin/base
-//= require Chart.bundle
-//= require chartkick
-//= require active_admin_custom
-
 // $(document).on('change', '.from-city-select', function() {
 //   var selectedOption = $(this).val();
 //   if (selectedOption === 'Other') {

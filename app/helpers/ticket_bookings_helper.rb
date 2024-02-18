@@ -1,0 +1,2 @@
+module TicketBookingsHelper
+end

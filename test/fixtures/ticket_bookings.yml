@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket: one
+  day: MyString
+  time: 2024-02-14 11:08:59
+  journey_location: MyText
+  journey_date: MyString
+  date: MyString
+
+two:
+  ticket: two
+  day: MyString
+  time: 2024-02-14 11:08:59
+  journey_location: MyText
+  journey_date: MyString
+  date: MyString

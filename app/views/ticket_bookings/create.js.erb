@@ -1,0 +1,8 @@
+<% if @booking.persisted? %>
+  // Add a new form field
+  var newFormField = '<%= j render partial: 'form_fields', locals: { form: form, index: @ticket.booked_count } %>';
+  document.getElementById('additional-form-fields').innerHTML += newFormField;
+<% else %>
+  // Display errors
+  console.error("Booking creation failed");
+<% end %>

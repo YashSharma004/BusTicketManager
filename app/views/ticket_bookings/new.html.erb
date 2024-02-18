@@ -1,0 +1,101 @@
+<center>
+<% if @ticket.present? %>
+  <div class="card">
+    <div class="card-body">
+     <%#= link_to 'Add New Ticket Entry', new_ticket_path, class: 'btn' %>
+      <p  style="align-content: left;"> Go to <%= link_to 'Home', root_path, class: 'btn' %></p>
+      <h3 class="card-title">Add details to tickets from: <%= "#{@ticket.week_date.beginning_of_week.strftime("%a, %d %b %Y")} to #{@ticket.week_date.end_of_week.strftime("%a, %d %b %Y")}" %> </h3>
+      <% @remaining_bookings.times do |i| %>
+        <%= form_with(model: [@ticket, @booking], local: true) do |form| %>
+          <%= render partial: 'form_fields', locals: { form: form, index: i } %>
+        <% end %>
+      <% end %>
+    </div>
+    <div>
+    	<%i = 1%>
+    	<% if @previous_bookings.present? %>
+    	<p>Here is all the journey details for all booking:</p> 
+    	<%@previous_bookings.each do |booking|%>
+    		<p> <b><%= i%>.</b> You have journey from <b><%= booking.journey_location%></b> on <b><%= booking.journey_date%></b> <%= booking.day%> <%= booking.time%> and you seat number is <b><%= booking.seat_number%></b>  <p>
+    			<%i = i+ 1%>
+    	<%end%>
+    	<%end%>
+    </div>
+  </div>
+</center>
+<% end %>
+<style type="text/css">
+	.card {
+  width: 80%;
+  max-width: 600px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  margin-bottom: 20px;
+}
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 10px;
+    text-decoration: none;
+    background-color: lightblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .btn:hover {
+    background-color: lightcyan;
+  }
+</style>
+
+
+<script>
+document.addEventListener('turbolinks:load', function() {
+  var forms = document.querySelectorAll('form');
+
+  forms.forEach(function(form, index) {
+    var formInputs = form.querySelectorAll('input, select, textarea');
+
+    if (index < forms.length - 1) {
+      formInputs.forEach(function(input) {
+        input.disabled = true;
+      });
+    }
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      var formData = new FormData(form);
+      var url = form.action;
+
+      fetch(url, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      }).then(function(response) {
+        if (response.ok) {
+          window.location.reload(); 
+        } else {
+          response.text().then(function(text) {
+            console.error(text);
+          });
+        }
+      }).catch(function(error) {
+        console.error(error);
+      });
+    });
+  });
+});
+
+
+</script>

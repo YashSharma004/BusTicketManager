@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_04_115356) do
+ActiveRecord::Schema.define(version: 2024_02_17_174918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 2024_02_04_115356) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
+  create_table "email_notifications", force: :cascade do |t|
+    t.date "date"
+    t.time "time"
+    t.string "from_city"
+    t.string "to_city"
+    t.string "seat_number"
+    t.string "email"
+    t.string "subject"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "payments", force: :cascade do |t|
     t.bigint "paid_by_id", null: false
     t.bigint "paid_to_id", null: false
@@ -38,6 +51,19 @@ ActiveRecord::Schema.define(version: 2024_02_04_115356) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["paid_by_id"], name: "index_payments_on_paid_by_id"
     t.index ["paid_to_id"], name: "index_payments_on_paid_to_id"
+  end
+
+  create_table "ticket_bookings", force: :cascade do |t|
+    t.bigint "ticket_id", null: false
+    t.string "day"
+    t.time "time"
+    t.text "journey_location"
+    t.string "journey_date"
+    t.string "date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "seat_number"
+    t.index ["ticket_id"], name: "index_ticket_bookings_on_ticket_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -65,10 +91,17 @@ ActiveRecord::Schema.define(version: 2024_02_04_115356) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "relationship"
     t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "payments", "users", column: "paid_by_id"
   add_foreign_key "payments", "users", column: "paid_to_id"
+  add_foreign_key "ticket_bookings", "tickets"
   add_foreign_key "tickets", "users"
   add_foreign_key "tickets", "users", column: "booked_by_id"
   add_foreign_key "tickets", "users", column: "booked_for_id"

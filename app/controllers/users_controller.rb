@@ -34,6 +34,7 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /users/1 or /users/1.json
@@ -59,6 +60,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def my_tickets
+    @user_tickets = Ticket.where("booked_by_id = ? OR booked_for_id = ?", current_user.id, current_user.id).sort.reverse
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
