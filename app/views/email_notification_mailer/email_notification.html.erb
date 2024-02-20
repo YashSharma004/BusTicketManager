@@ -75,7 +75,6 @@
         <p> Date: <b> <%= @email_notification.date.strftime("%a, %d %b %Y") %></b>  </p>
         <p> Journey from: <b><%= @email_notification.from_city %></b><p>
         <p> Journey to: <b><%= @email_notification.to_city %></b><p>
-        <p> Journey to: <b><%= @email_notification.to_city %></b><p>
         <%if @email_notification.bus_no.present? %>
         <p> Bus No: <b><%= @email_notification.bus_no %></b><p>
         <%end%>
