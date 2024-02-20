@@ -1,5 +1,5 @@
 ActiveAdmin.register EmailNotification do
-  permit_params :date, :time, :from_city, :to_city, :seat_number, :email, :subject, :message
+  permit_params :date, :time, :from_city, :to_city, :seat_number, :email, :subject, :bus_no, :boarding_location, :drop_location, :message, :operator, :operator_contact
 
   form do |f|
     f.inputs "Email Notification Details" do
@@ -13,7 +13,12 @@ ActiveAdmin.register EmailNotification do
 
       f.input :email, :label => 'Email', :as => :select, :collection => User.all.map{|user| ["#{user.name}", user.email]}
       f.input :subject, :label => 'Email Type', as: :select, collection: ['Reminder', 'Other']
-      f.input :message
+      f.input :bus_no
+      f.input :boarding_location, as: :select, collection: ["Shanti Palace", "Nanakheda", "Vijay Nagar", "AICTSL Campus"]
+      f.input :drop_location, as: :select, collection: ["Shanti Palace", "Nanakheda", "Vijay Nagar", "AICTSL Campus"]
+      # f.input :message
+      f.input :operator, as: :select, collection: ["Royal Travels", "Other"]
+      f.input :operator_contact, as: :select, collection: ["Royal Travels Indore: 0734-4027999, 7342533822, 9111992222", "Royal Travels Ujjain: 0734-2533822", "Not Known"]
     end
     f.actions
   end

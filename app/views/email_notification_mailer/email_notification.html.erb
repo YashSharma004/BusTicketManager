@@ -63,7 +63,7 @@
  <div class="container">
   <div class="top-container">
   <center>
-    <%= image_tag attachments['bus.png'].url, alt: 'Our Photo', class: 'photo', style:"height: 15%; width: 25%; color: red;" %>
+    <%= image_tag attachments['bus.png'].url, alt: 'Logo', class: 'photo', style:"height: 15%; width: 25%; color: red;" %>
   </center>
     <h2>Hello <%= @booked_by.name %> </h2>
     <h2>Your Upcoming Journey Details</h2>
@@ -75,6 +75,19 @@
         <p> Date: <b> <%= @email_notification.date.strftime("%a, %d %b %Y") %></b>  </p>
         <p> Journey from: <b><%= @email_notification.from_city %></b><p>
         <p> Journey to: <b><%= @email_notification.to_city %></b><p>
+        <p> Journey to: <b><%= @email_notification.to_city %></b><p>
+        <%if @email_notification.bus_no.present? %>
+        <p> Bus No: <b><%= @email_notification.bus_no %></b><p>
+        <%end%>
+        <%if @email_notification.boarding_location.present? %>
+        <p> Boarding Location: <b><%= @email_notification.boarding_location %></b><p>
+        <%end%>
+        <%if @email_notification.drop_location.present? %>
+        <p> Drop Location: <b><%= @email_notification.drop_location %></b><p>
+        <%end%>
+        <%if @email_notification.operator_contact.present? %>
+        <p> Operator Contact: <b><%= @email_notification.operator_contact %></b><p>
+        <%end%>
       </p>
     </div>
  </div>
