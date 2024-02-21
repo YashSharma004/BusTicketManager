@@ -91,6 +91,8 @@ GEM
       xpath (~> 3.2)
     chartkick (4.2.1)
     childprocess (4.1.0)
+    city-state (1.1.0)
+      rubyzip (>= 2.3)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.4)
@@ -277,6 +279,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   chartkick
+  city-state
   devise
   groupdate
   jbuilder (~> 2.7)

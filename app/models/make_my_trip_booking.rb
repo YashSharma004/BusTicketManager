@@ -1,0 +1,2 @@
+class MakeMyTripBooking < ApplicationRecord
+end

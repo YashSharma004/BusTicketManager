@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_02_17_174918) do
+ActiveRecord::Schema.define(version: 2024_02_21_054916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,19 @@ ActiveRecord::Schema.define(version: 2024_02_17_174918) do
     t.string "email"
     t.string "subject"
     t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "bus_no"
+    t.string "boarding_location"
+    t.string "drop_location"
+    t.string "operator"
+    t.string "operator_contact"
+  end
+
+  create_table "make_my_trip_bookings", force: :cascade do |t|
+    t.string "boarding_location"
+    t.string "drop_location"
+    t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

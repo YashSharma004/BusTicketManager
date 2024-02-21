@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'make_my_trip_bookings/new'
+  get 'make_my_trip_bookings/search', to: 'make_my_trip_bookings#search', as: :search_buses
+  get 'make_my_trip_bookings/search_suggestion'
   get 'ticket_bookings/new'
   get 'ticket_bookings/create'
   devise_for :users

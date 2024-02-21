@@ -60,3 +60,5 @@ gem 'chartkick'
 gem 'groupdate'
 # gem 'chartkick-middleware'
 gem 'devise'
+gem 'city-state'
+

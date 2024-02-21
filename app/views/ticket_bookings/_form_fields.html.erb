@@ -1,91 +1,80 @@
-<%# include TimeHelper%>
 <div class="booking-fields">
   <div class="form-row">
     <%= form.fields_for :ticket_booking, @booking do |f| %>
-      <div class="field">
-        <%= f.label :day, "Day:"%>
-        <% mon =  (@ticket.week_date.beginning_of_week ).strftime("%a, %d %b %Y")%>
-        <% tue =  (@ticket.week_date.beginning_of_week + 1).strftime("%a, %d %b %Y")%>
-        <% wed =  (@ticket.week_date.beginning_of_week + 2).strftime("%a, %d %b %Y")%>
-        <% thu =  (@ticket.week_date.beginning_of_week + 3).strftime("%a, %d %b %Y")%>
-        <% fri =  (@ticket.week_date.beginning_of_week + 4).strftime("%a, %d %b %Y")%>
-        <% sat =  (@ticket.week_date.beginning_of_week + 5).strftime("%a, %d %b %Y")%>
-        <% sun =  (@ticket.week_date.beginning_of_week + 6).strftime("%a, %d %b %Y")%>
-        <%= f.select :day, options_for_select([mon, tue, wed, thu, fri, sat, sun]) %>
+      <div class="form-group">
+        <%= f.label :day, "Day:" %>
+        <% mon = (@ticket.week_date.beginning_of_week).strftime("%a, %d %b %Y") %>
+        <% tue = (@ticket.week_date.beginning_of_week + 1).strftime("%a, %d %b %Y") %>
+        <% wed = (@ticket.week_date.beginning_of_week + 2).strftime("%a, %d %b %Y") %>
+        <% thu = (@ticket.week_date.beginning_of_week + 3).strftime("%a, %d %b %Y") %>
+        <% fri = (@ticket.week_date.beginning_of_week + 4).strftime("%a, %d %b %Y") %>
+        <% sat = (@ticket.week_date.beginning_of_week + 5).strftime("%a, %d %b %Y") %>
+        <% sun = (@ticket.week_date.beginning_of_week + 6).strftime("%a, %d %b %Y") %>
+        <%= f.select :day, options_for_select([mon, tue, wed, thu, fri, sat, sun]), {}, class: "form-control custom-select" %>
       </div>
-      <div class="field">
-        <%= f.label :time, "Time:"%>
-        <%= f.select :time_hours, options_for_select((1..24).map { |hour| [hour.to_s.rjust(2, '0'), hour] }), {}, class: "form-control" %>
-        <%= f.select :time_minutes, options_for_select((0..59).map { |minute| [minute.to_s.rjust(2, '0'), minute] }), {}, class: "form-control" %>
+      <div class="form-group">
+        <%= f.label :time, "Time:" %>
+        <%= f.select :time_hours, options_for_select((1..24).map { |hour| [hour.to_s.rjust(2, '0'), hour] }), {}, class: "form-control custom-select" %>
+        <%= f.select :time_minutes, options_for_select((0..59).map { |minute| [minute.to_s.rjust(2, '0'), minute] }), {}, class: "form-control custom-select" %>
       </div>
-      <div class="field">
+      <div class="form-group">
         <%= f.label :journey_location, "Journey From To:" %>
-        <%= f.text_field :journey_location, class: "form-control", style: "width: 150px;" %>
+        <%= f.text_field :journey_location, class: "form-control", style: "width: 100%;" %>
       </div>
-      <div id="field">
-			  <div class="field">
-			    <%= f.label :seat_number, "Seat Number:" %>
-			    <%= f.text_field :seat_number, class: "form-control", style: "width: 50px;" %>
-			  </div>
-			</div>
-			<div class="field">
-			  <%#= label_tag :seat_number_option, "Seat Type" %>
-			  <%#= select_tag :seat_number_option, options_for_select([["Text Type", "text_field"], ["AlphanumericType", "dropdown"], ["NumberType", "number_dropdown"]]), class: "form-control", onchange: "toggleSeatInput(this.value)", prompt: "Select Type" %>
-			</div>
-
-			<div id="seat_number_text_field" style="display: none;">
-			  <div class="field">
-			    <%#= f.label :seat_number, "Seat Number" %>
-			    <%#= f.text_field :seat_number, class: "form-control", style: "width: 50px;" %>
-			  </div>
-			</div>
-
-			<div id="seat_number_dropdown" style="display: none;">
-			  <div class="field">
-			    <%#= f.label :seat_number, "Seat Number" %>
-			    <%#= f.select :seat_number, options_for_select(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4", "E1", "E2", "E3", "E4", "F1", "F2", "F3", "F4", "G1", "G2", "G3", "G4", "H1", "H2", "H3", "H4", "I1", "I2", "I3", "I4", "J1", "J2", "J3", "J4", "K1", "K2", "K3", "K4", "K5"]), {}, class: "form-control" %>
-			  </div>
-			</div>
-
-			<div id="seat_number_number_dropdown" style="display: none;">
-			  <div class="field">
-			    <%#= f.label :seat_number, "Seat Number" %>
-			    <%#= f.select :seat_number, options_for_select([""] + (1..50).to_a), {}, class: "form-control" %>
-			  </div>
-			</div>      
-		<div class="actions">
-        <%= form.submit "Create Booking", class: "btn btn-primary" %>
+      <div class="form-group">
+        <%= f.label :seat_number, "Seat Number:" %>
+        <%= f.text_field :seat_number, class: "form-control", style: "width: 100%;" %>
+      </div>
+      <div class="form-group">
+        <%= form.submit "Create Booking", class: "btn btn-primary btn-block" %>
       </div>
     <% end %>
   </div>
 </div>
 <style type="text/css">
-	.booking-fields {
+  .booking-fields {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
   margin-bottom: 20px;
 }
 
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.control-label {
+  font-weight: bold;
 }
 
-.field {
-  margin: 10px;
+.form-control {
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
-.actions {
-  margin-top: 10px;
-  text-align: center;
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="%23707070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 10px center/12px;
+  padding-right: 30px;
 }
 
 .btn {
-  padding: 10px 20px;
-  background-color: #007bff;
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  text-align: center;
   color: #fff;
+  background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
@@ -93,20 +82,3 @@
 }
 
 </style>
-<%# <script>
-  function toggleSeatInput(value) {
-    if (value === "text_field") {
-      document.getElementById("seat_number_text_field").style.display = "block";
-      document.getElementById("seat_number_dropdown").style.display = "none";
-      document.getElementById("seat_number_number_dropdown").style.display = "none";
-    } else if (value === "dropdown") {
-      document.getElementById("seat_number_text_field").style.display = "none";
-      document.getElementById("seat_number_dropdown").style.display = "block";
-      document.getElementById("seat_number_number_dropdown").style.display = "none";
-    } else if (value === "number_dropdown") {
-      document.getElementById("seat_number_text_field").style.display = "none";
-      document.getElementById("seat_number_dropdown").style.display = "none";
-      document.getElementById("seat_number_number_dropdown").style.display = "block";
-    }
-  }
-</script> %>

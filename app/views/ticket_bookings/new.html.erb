@@ -2,8 +2,7 @@
 <% if @ticket.present? %>
   <div class="card">
     <div class="card-body">
-     <%#= link_to 'Add New Ticket Entry', new_ticket_path, class: 'btn' %>
-      <p  style="align-content: left;"> Go to <%= link_to 'Home', root_path, class: 'btn' %></p>
+      <p  style="align-content: left;"> <%= link_to 'Go to Home', root_path, class: 'btn' %></p>
       <h3 class="card-title">Add details to tickets from: <%= "#{@ticket.week_date.beginning_of_week.strftime("%a, %d %b %Y")} to #{@ticket.week_date.end_of_week.strftime("%a, %d %b %Y")}" %> </h3>
       <% @remaining_bookings.times do |i| %>
         <%= form_with(model: [@ticket, @booking], local: true) do |form| %>
