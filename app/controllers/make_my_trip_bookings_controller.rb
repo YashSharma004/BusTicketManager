@@ -9,9 +9,12 @@ class MakeMyTripBookingsController < ApplicationController
     drop_location = params[:drop_location]
     date = params[:date]
 
-    search_url = "https://www.makemytrip.com/bus/search/#{boarding_location}/#{drop_location}/#{date}"
-
-    redirect_to search_url
+    if boarding_location.present? && drop_location.present? && date.present?
+      search_url = "https://www.makemytrip.com/bus/search/#{boarding_location}/#{drop_location}/#{date}"
+      redirect_to search_url, notice: "Book ticket here"
+    else
+      redirect_to make_my_trip_bookings_new_path, notice: "Please add correct search paramaters"
+    end
   end
 
   def search_suggestion

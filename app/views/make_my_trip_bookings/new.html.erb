@@ -50,9 +50,31 @@
 	.btn1:hover {
 	  background-color: #0056b3;
 	}
+	#loader {
+	  border: 12px solid #f3f3f3;
+	  border-radius: 50%;
+	  border-top: 12px solid #444444;
+	  width: 70px;
+	  height: 70px;
+	  animation: spin 1s linear infinite;
+	}
 
+	.center {
+	  position: absolute;
+	  top: 0;
+	  bottom: 0;
+	  left: 0;
+	  right: 0;
+	  margin: auto;
+	}
+
+	@keyframes spin {
+	  100% {
+	      transform: rotate(360deg);
+	  }
+	}
 </style>
-
+<div id="loader" class="center"></div>
 <%= form_with(url: search_buses_path, method: "get", class: "bus-search-form") do |form| %>
   <div class="form-group">
     <%= form.label :boarding_location, "Boarding Location", class: "control-label" %>
@@ -72,3 +94,18 @@
   <%= form.submit "Search Buses", class: "btn1 btn-primary btn-block" %>
 <% end %>
 <center><%= link_to 'Home', root_path, class: 'btn' %></center>
+<script>
+	document.onreadystatechange = function () {
+	  if (document.readyState !== "complete") {
+	    document.querySelector(
+	        "body").style.visibility = "hidden";
+	    document.querySelector(
+	        "#loader").style.visibility = "visible";
+	  } else {
+	    document.querySelector(
+	        "#loader").style.display = "none";
+	    document.querySelector(
+	        "body").style.visibility = "visible";
+	  }
+	};
+</script>
